@@ -1,4 +1,4 @@
-module.exports = (connex, Sequelize) => {
+const product = (connex, Sequelize) => {
     const Product = connex.define('product', {
         name: {
             type: Sequelize.STRING
@@ -18,3 +18,4 @@ module.exports = (connex, Sequelize) => {
     });
     return Product;
 }
+export default product;

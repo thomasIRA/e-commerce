@@ -1,7 +1,6 @@
-const dbConfig = require('../config/db.config');
+import dbConfig from '../config/db.config.js';
 import Sequelize from 'sequelize';
-const Product = require('../models/product.model')
-
+import product from './product.model.js';
 const connex = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.DIALECT,
@@ -12,6 +11,6 @@ const connex = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.connex = connex;
-db.products = Product(connex, Sequelize);
+db.products = product(connex, Sequelize);
 
 export default db;
