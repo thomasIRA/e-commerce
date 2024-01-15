@@ -4,7 +4,7 @@
       <MainNav :toggle="toggleSideBar"/>
       <RouterView :inventory="inventory"/>
       <MainFooter/>
-      <SideBar v-if="showSideBar" :toggle="toggleSideBar"/>
+      <SideBar v-if="showSideBar" :toggle="toggleSideBar" :cart="cart"/>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
   data () {
     return {
       showSideBar: false,
-      inventory: products
+      inventory: products,
+      cart: {}
     }
   },
   methods: {
