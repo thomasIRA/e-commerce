@@ -13,20 +13,22 @@
 import MainFooter from '@/components/MainFooter.vue'
 import SideBar from '@/components/SideBar.vue'
 import MainNav from './components/MainNav.vue'
-import products from '@/data/products.json'
+import ProductDataService from '@/services/ProductDataService.js'
 export default {
   components: {
     MainFooter,
     SideBar,
     MainNav
   },
+  mounted () {
+    ProductDataService.getAll()
+      .then(res => { this.inventory = res.data })
+  },
   data () {
     return {
       showSideBar: false,
-      inventory: products,
-      cart: {
-
-      }
+      inventory: [],
+      cart: {}
     }
   },
   methods: {
@@ -34,6 +36,7 @@ export default {
       this.showSideBar = !this.showSideBar
     },
     addToCart (product, index) {
+      console.log(product.qty)
       if (!this.cart[product]) this.cart[product] = 0
       if (isNaN(this.inventory[index].qty)) this.inventory[index].qty = 1
       this.cart[product] += this.inventory[index].qty
