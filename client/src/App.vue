@@ -2,7 +2,7 @@
   <div class="bg-main-200 min-h-screen">
     <div class="max-w-screen-lg mx-auto p-3 text-text text-dark">
       <MainNav :toggle="toggleSideBar" :qty="totalQty"/>
-      <RouterView :inventory="inventory" :add="addToCart"/>
+      <RouterView :inventory="inventory" :add="addToCart" :addInv="addInventory" :updateInv="updateInventory" :removeInv="removeInventory" :remove="removeFromCart"/>
       <MainFooter/>
       <SideBar v-if="showSideBar" :toggle="toggleSideBar" :cart="cart" :inventory="inventory" :remove="removeFromCart"/>
     </div>
@@ -43,6 +43,19 @@ export default {
     },
     removeFromCart (name) {
       delete this.cart[name]
+    },
+    addInventory (product) {
+      this.inventory.push(product)
+    },
+    updateInventory (index, data) {
+      this.inventory[index].name = data.name
+      this.inventory[index].photo = data.photo
+      this.inventory[index].description = data.description
+      this.inventory[index].price = data.price
+      this.inventory[index].type = data.type
+    },
+    removeInventory (index) {
+      this.inventory.splice(index, 1)
     }
   },
   computed: {
